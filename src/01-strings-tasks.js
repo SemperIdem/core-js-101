@@ -18,8 +18,8 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-function concatenateStrings(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function concatenateStrings(value1, value2) {
+  return value1 + value2;
 }
 
 
@@ -34,8 +34,8 @@ function concatenateStrings(/* value1, value2 */) {
  *   'b'     => 1
  *   ''      => 0
  */
-function getStringLength(/* value */) {
-  throw new Error('Not implemented');
+function getStringLength(value) {
+  return value.length;
 }
 
 /**
@@ -51,8 +51,8 @@ function getStringLength(/* value */) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -65,8 +65,9 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const result = value.match(/Hello, (\w+\s\w+)!/);
+  return result[1];
 }
 
 
@@ -80,8 +81,8 @@ function extractNameFromTemplate(/* value */) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
+function getFirstChar(value) {
+  return value[0];
 }
 
 /**
@@ -95,8 +96,8 @@ function getFirstChar(/* value */) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
 }
 
 /**
@@ -110,8 +111,8 @@ function removeLeadingAndTrailingWhitespaces(/* value */) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(value, count) {
+  return value.repeat(count);
 }
 
 /**
@@ -126,8 +127,8 @@ function repeatString(/* value, count */) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  return str.replace(new RegExp(value), '');
 }
 
 /**
@@ -141,8 +142,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.substring(1, str.length - 1);
 }
 
 
@@ -156,8 +157,8 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
@@ -175,8 +176,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -202,8 +203,11 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const top = ''.concat('┌', '─'.repeat(width - 2), '┐', '\n');
+  const lines = ''.concat('│', ' '.repeat(width - 2), '│', '\n');
+  const bottom = ''.concat('└', '─'.repeat(width - 2), '┘', '\n');
+  return `${top}${lines.repeat(height - 2)}${bottom}`;
 }
 
 
@@ -217,14 +221,23 @@ function getRectangleString(/* width, height */) {
  * @example
  *
  *   'hello' => 'uryyb'
- *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
+ *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnвебq?'
  *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
  *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.split('').map((element) => {
+    if ((element.charCodeAt(0) > 109
+    || ((element.charCodeAt(0) > 77) && (element.charCodeAt(0) < 97)))) {
+      return String.fromCharCode(element.charCodeAt(0) - 13);
+    }
+    if (element.charCodeAt(0) >= 65) {
+      return String.fromCharCode(element.charCodeAt(0) + 13);
+    }
+    return element;
+  }).join('');
 }
 
 /**
@@ -240,8 +253,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return value instanceof String || typeof value === 'string';
 }
 
 
@@ -269,8 +282,17 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const clubSuit = String.fromCharCode(9827);
+  const diamondSuit = String.fromCharCode(9830);
+  const heartSuit = String.fromCharCode(9829);
+  const spadeSuit = String.fromCharCode(9824);
+  const packClub = [`A${clubSuit}`].concat(Array(9).fill().map((_, i) => (i + 2) + clubSuit)).concat([`J${clubSuit}`, `Q${clubSuit}`, `K${clubSuit}`]);
+  const packDiamond = [`A${diamondSuit}`].concat(Array(9).fill().map((_, i) => (i + 2) + diamondSuit)).concat([`J${diamondSuit}`, `Q${diamondSuit}`, `K${diamondSuit}`]);
+  const packHeart = [`A${heartSuit}`].concat(Array(9).fill().map((_, i) => (i + 2) + heartSuit)).concat([`J${heartSuit}`, `Q${heartSuit}`, `K${heartSuit}`]);
+  const packSpade = [`A${spadeSuit}`].concat(Array(9).fill().map((_, i) => (i + 2) + spadeSuit)).concat([`J${spadeSuit}`, `Q${spadeSuit}`, `K${spadeSuit}`]);
+  const pack = packClub.concat(packDiamond, packHeart, packSpade);
+  return pack.indexOf(value);
 }
 
 
